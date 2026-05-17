@@ -3,179 +3,91 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppHotel.Views.MainPage"
              Title="App Hotel"
-             BackgroundColor="#F5F5F7">
+             BackgroundColor="White">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15" Padding="15">
+        <VerticalStackLayout Spacing="20" Padding="30">
 
-            <!-- ═══ CABEÇALHO ═══════════════════════════════════════════════ -->
-            <Frame BackgroundColor="#512BD4"
-                   CornerRadius="10"
-                   HasShadow="False"
-                   Padding="20">
-                <VerticalStackLayout Spacing="5">
-                    <Label Text="🏨 App Hotel"
-                           FontSize="28"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="Center" />
-                    <Label Text="Reserve seu quarto com facilidade"
-                           FontSize="14"
-                           TextColor="#C9B8FF"
-                           HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </Frame>
+            <Label Text="App Hotel - Reservas"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
 
-            <!-- ── Card: Dados do Hóspede ─────────────────────────────── -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="10">
+            <Label Text="Preencha os dados abaixo para simular sua reserva."
+                   FontSize="16"
+                   TextColor="#666666"
+                   HorizontalOptions="Center" />
 
-                    <Label Text="👤 Dados do Hóspede"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="#1C1C1E" />
+            <!-- Dados do Hóspede -->
+            <Label Text="Dados do Hóspede" FontSize="18" FontAttributes="Bold" TextColor="Black" Margin="0,15,0,0"/>
+            
+            <Entry Placeholder="Nome completo *" Text="{Binding Nome}" TextColor="Black" BackgroundColor="Transparent" />
+            <Entry Placeholder="E-mail" Text="{Binding Email}" Keyboard="Email" TextColor="Black" BackgroundColor="Transparent" />
+            <Entry Placeholder="Telefone" Text="{Binding Telefone}" Keyboard="Telephone" TextColor="Black" BackgroundColor="Transparent" />
 
-                    <Entry Placeholder="Nome completo *"
-                           Text="{Binding Nome}" />
+            <!-- Período da Estadia -->
+            <Label Text="Período da Estadia" FontSize="18" FontAttributes="Bold" TextColor="Black" Margin="0,15,0,0"/>
+            
+            <Grid ColumnDefinitions="100, *" RowDefinitions="Auto, Auto" RowSpacing="15">
+                <Label Text="Check-in:" VerticalOptions="Center" TextColor="Black" Grid.Row="0" Grid.Column="0" />
+                <DatePicker Date="{Binding DataCheckIn}" MinimumDate="{Binding DataMinima}" TextColor="Black" Grid.Row="0" Grid.Column="1" HorizontalOptions="Fill" />
 
-                    <Entry Placeholder="E-mail"
-                           Text="{Binding Email}"
-                           Keyboard="Email" />
+                <Label Text="Check-out:" VerticalOptions="Center" TextColor="Black" Grid.Row="1" Grid.Column="0" />
+                <DatePicker Date="{Binding DataCheckOut}" MinimumDate="{Binding DataMinimaSaida}" TextColor="Black" Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" />
+            </Grid>
 
-                    <Entry Placeholder="Telefone"
-                           Text="{Binding Telefone}"
-                           Keyboard="Telephone" />
+            <!-- Hóspedes -->
+            <Label Text="Quantidade de Hóspedes" FontSize="18" FontAttributes="Bold" TextColor="Black" Margin="0,15,0,0"/>
+            
+            <Grid ColumnDefinitions="100, 50, *" RowDefinitions="Auto, Auto" RowSpacing="15">
+                <Label Text="Adultos:" VerticalOptions="Center" TextColor="Black" Grid.Row="0" Grid.Column="0" />
+                <Label Text="{Binding QuantidadeAdultos}" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="16" Grid.Row="0" Grid.Column="1" />
+                <Stepper Value="{Binding QuantidadeAdultos}" Minimum="1" Maximum="10" Grid.Row="0" Grid.Column="2" HorizontalOptions="Start" />
 
-                </VerticalStackLayout>
-            </Frame>
+                <Label Text="Crianças:" VerticalOptions="Center" TextColor="Black" Grid.Row="1" Grid.Column="0" />
+                <Label Text="{Binding QuantidadeCriancas}" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="16" Grid.Row="1" Grid.Column="1" />
+                <Stepper Value="{Binding QuantidadeCriancas}" Minimum="0" Maximum="5" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" />
+            </Grid>
 
-            <!-- ── Card: Período ──────────────────────────────────────── -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="10">
+            <!-- Tipo de Quarto -->
+            <Label Text="Tipo de Quarto" FontSize="18" FontAttributes="Bold" TextColor="Black" Margin="0,15,0,0"/>
+            
+            <Picker Title="Selecione uma opção *"
+                    ItemsSource="{Binding ListaQuartos}"
+                    SelectedItem="{Binding QuartoSelecionado}"
+                    ItemDisplayBinding="{Binding NomeQuarto}"
+                    TextColor="Black" TitleColor="#666666" BackgroundColor="Transparent" />
 
-                    <Label Text="📅 Período da Estadia"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="#1C1C1E" />
+            <Label Text="{Binding DescricaoQuartoSelecionado}"
+                   TextColor="#666666" FontSize="14"
+                   IsVisible="{Binding TemQuartoSelecionado}" />
 
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="10" ColumnSpacing="10">
-                        <Label Text="Check-in:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" TextColor="#6C6C70"/>
-                        <DatePicker x:Name="CheckInPicker"
-                                    Date="{Binding DataCheckIn}"
-                                    MinimumDate="{Binding DataMinima}"
-                                    Grid.Row="0" Grid.Column="1" />
+            <Label Text="{Binding PrecoQuartoSelecionado}"
+                   TextColor="Black" FontSize="14" FontAttributes="Bold"
+                   IsVisible="{Binding TemQuartoSelecionado}" />
 
-                        <Label Text="Check-out:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" TextColor="#6C6C70"/>
-                        <DatePicker x:Name="CheckOutPicker"
-                                    Date="{Binding DataCheckOut}"
-                                    MinimumDate="{Binding DataMinimaSaida}"
-                                    Grid.Row="1" Grid.Column="1" />
-                    </Grid>
-
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- ── Card: Hóspedes ─────────────────────────────────────── -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="10">
-
-                    <Label Text="👥 Hóspedes"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="#1C1C1E" />
-
-                    <Grid ColumnDefinitions="*,Auto" RowSpacing="10">
-                        <Label Text="Adultos:" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" TextColor="#6C6C70"/>
-                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                            <Label Text="{Binding QuantidadeAdultos}" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" TextColor="#512BD4" />
-                            <Stepper Value="{Binding QuantidadeAdultos}" Minimum="1" Maximum="10" />
-                        </HorizontalStackLayout>
-                        
-                        <BoxView HeightRequest="1" Color="#F0F0F0" Grid.Row="1" Grid.ColumnSpan="2" />
-
-                        <Label Text="Crianças:" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" TextColor="#6C6C70"/>
-                        <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                            <Label Text="{Binding QuantidadeCriancas}" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" TextColor="#512BD4" />
-                            <Stepper Value="{Binding QuantidadeCriancas}" Minimum="0" Maximum="5" />
-                        </HorizontalStackLayout>
-                    </Grid>
-
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- ── Card: Tipo de Quarto ───────────────────────────────── -->
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="10">
-
-                    <Label Text="🛏️ Tipo de Quarto"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="#1C1C1E" />
-
-                    <Picker Title="Selecione o quarto *"
-                            ItemsSource="{Binding ListaQuartos}"
-                            SelectedItem="{Binding QuartoSelecionado}"
-                            ItemDisplayBinding="{Binding NomeQuarto}" />
-
-                    <Label Text="{Binding DescricaoQuartoSelecionado}"
-                           TextColor="#6C6C70"
-                           FontSize="14"
-                           IsVisible="{Binding TemQuartoSelecionado}" />
-
-                    <Label Text="{Binding PrecoQuartoSelecionado}"
-                           TextColor="#512BD4"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           IsVisible="{Binding TemQuartoSelecionado}" />
-
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- ── Botão Calcular ──────────────────────────────────────── -->
+            <!-- Botões -->
             <Button Text="Calcular Reserva"
                     Clicked="OnCalcularClicked"
-                    BackgroundColor="#512BD4"
+                    BackgroundColor="Black"
                     TextColor="White"
                     FontAttributes="Bold"
-                    FontSize="16"
-                    CornerRadius="10"
+                    Margin="0,25,0,0"
                     HeightRequest="50" />
 
-            <!-- ── Card: Resultado (oculto até calcular) ──────────────── -->
-            <Frame x:Name="ResultadoFrame"
-                   BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True"
-                   IsVisible="False">
-                <Label x:Name="ResultadoLabel"
-                       FontSize="16"
-                       HorizontalTextAlignment="Center"
-                       LineHeight="1.5" />
+            <Frame x:Name="ResultadoFrame" BackgroundColor="#F0F0F0" IsVisible="False" HasShadow="False" BorderColor="Black" Margin="0,10,0,0">
+                <Label x:Name="ResultadoLabel" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center" />
             </Frame>
 
-            <!-- ── Botão Sobre ─────────────────────────────────────────── -->
             <Button Text="Sobre o Desenvolvedor"
                     Clicked="OnBotaoSobreClicked"
                     BackgroundColor="Transparent"
-                    TextColor="#512BD4"
-                    BorderColor="#512BD4"
+                    TextColor="Black"
+                    BorderColor="Black"
                     BorderWidth="1"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    Margin="0,0,0,20" />
+                    Margin="0,10,0,30"
+                    HeightRequest="50" />
 
         </VerticalStackLayout>
     </ScrollView>
