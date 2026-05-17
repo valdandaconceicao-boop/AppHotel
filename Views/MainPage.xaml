@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppHotel.Views.MainPage"
+             Title="App Hotel - Reservas">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <Label Text="App Hotel"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#512BD4" />
+
+            <Label Text="Faça sua reserva de forma rápida e prática!"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="Gray" />
+
+            <Frame BorderColor="#512BD4" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dados do Hóspede" FontSize="20" FontAttributes="Bold" TextColor="#512BD4" />
+                    <Entry Placeholder="Nome Completo" Text="{Binding Nome}" />
+                    <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+                    <Entry Placeholder="Telefone" Text="{Binding Telefone}" Keyboard="Telephone" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BorderColor="#512BD4" CornerRadius="10" Padding="15">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10">
+                    <Label Text="Check-in:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                    <DatePicker Date="{Binding DataCheckIn}" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="Check-out:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                    <DatePicker Date="{Binding DataCheckOut}" Grid.Row="1" Grid.Column="1" />
+                </Grid>
+            </Frame>
+
+            <Frame BorderColor="#512BD4" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10">
+                        <Label Text="Adultos:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                        <Stepper x:Name="AdultosStepper" Value="{Binding QuantidadeAdultos}" Minimum="1" Maximum="10" Grid.Row="0" Grid.Column="1" />
+
+                        <Label Text="Crianças:" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                        <Stepper x:Name="CriancasStepper" Value="{Binding QuantidadeCriancas}" Minimum="0" Maximum="5" Grid.Row="1" Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BorderColor="#512BD4" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Selecione o Quarto" FontSize="20" FontAttributes="Bold" TextColor="#512BD4" />
+                    <Picker Title="Escolha o quarto"
+                            ItemsSource="{Binding ListaQuartos}"
+                            SelectedItem="{Binding QuartoSelecionado}"
+                            ItemDisplayBinding="{Binding NomeQuarto}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Calcular Reserva"
+                    Clicked="OnCalcularClicked"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+
+            <Label x:Name="ResultadoLabel"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="#512BD4"
+                   FontAttributes="Bold" />
+
+            <Button Text="Sobre o Desenvolvedor"
+                    Clicked="OnBotaoSobreClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#512BD4"
+                    BorderColor="#512BD4"
+                    BorderWidth="1" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

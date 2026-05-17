@@ -1,0 +1,21 @@
+# .NET MAUI
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.pdb
+*.db
+*.log
+
+# IDEs
+.idea/
+*.sln.docstates
+*.csproj.user
+
+# Pasta de configuração do VS Code (opcional)
+.vscode/
+
+# Pasta de publicação
+publish/
