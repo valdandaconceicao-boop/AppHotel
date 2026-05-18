@@ -15,6 +15,23 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+#if WINDOWS
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(
+            "FixPickerTitle",
+            (handler, picker) =>
+            {
+                var comboBox = handler.PlatformView as Microsoft.UI.Xaml.Controls.ComboBox;
+                if (comboBox != null)
+                {
+                    comboBox.Header = null;
+                    comboBox.HeaderTemplate = null;
+                    comboBox.PlaceholderText = picker.Title ?? "Selecione";
+                    comboBox.PlaceholderForeground = new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                        Microsoft.UI.Colors.Gray);
+                }
+            });
+#endif
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

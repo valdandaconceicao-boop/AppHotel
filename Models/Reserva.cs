@@ -5,9 +5,9 @@ public class Reserva
     public Hospede? Hospede { get; set; }
     public Quarto? QuartoSelecionado { get; set; }
     public int QuantidadeDias => (DataCheckOut - DataCheckIn).Days;
-    public DateTime DataCheckIn => Hospede?.DataCheckIn ?? DateTime.Now;
-    public DateTime DataCheckOut => Hospede?.DataCheckOut ?? DateTime.Now.AddDays(1);
-    
+    public DateTime DataCheckIn => Hospede?.DataCheckIn ?? DateTime.Today;
+    public DateTime DataCheckOut => Hospede?.DataCheckOut ?? DateTime.Today.AddDays(1);
+
     public double ValorTotal
     {
         get
@@ -16,7 +16,7 @@ public class Reserva
                 return 0;
 
             int dias = QuantidadeDias;
-            if (dias <= 0) dias = 1;
+            if (dias <= 0) return 0;
 
             double totalAdultos = Hospede.QuantidadeAdultos * QuartoSelecionado.ValorDiariaAdulto * dias;
             double totalCriancas = Hospede.QuantidadeCriancas * QuartoSelecionado.ValorDiariaCrianca * dias;

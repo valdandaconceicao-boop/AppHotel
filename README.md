@@ -1,39 +1,38 @@
-# 🏨 App Hotel - MAUI
+# App Hotel - MAUI
 
-Projeto desenvolvido como parte da **Agenda 13 - Desenvolvimento Mobile**.
-Este é um aplicativo multiplataforma construído com **.NET MAUI (C# e XAML)**.
+Projeto desenvolvido para a Agenda 13 da disciplina de Desenvolvimento Mobile.
+Trata-se de um aplicativo multiplataforma para simulação de reservas de hotel construído com .NET MAUI.
 
-## 📱 Sobre o Projeto
+## Sobre o Projeto
 
-O aplicativo permite a simulação de uma reserva de hotel com as seguintes funcionalidades:
-- 🧑‍💼 Coleta de dados do hóspede principal (Nome, E-mail, Telefone).
-- 📅 Seleção do período da estadia (Check-in e Check-out com validação).
-- 👥 Definição da quantidade de hóspedes (Adultos e Crianças) usando controles `Stepper`.
-- 🛏️ Escolha do tipo de quarto através de um `Picker`, com cálculo automático baseado na quantidade de dias e hóspedes.
-- 🧑‍💻 Página autoral "Sobre o Desenvolvedor" com foto real, implementando navegação estruturada.
+O aplicativo permite preencher os dados de um hóspede e calcular o valor total de uma estadia. Funcionalidades implementadas:
+- Cadastro de dados básicos do hóspede (Nome, E-mail, Telefone).
+- Seleção de período de estadia (Check-in e Check-out) com validação de datas.
+- Controle de quantidade de hóspedes (Adultos e Crianças) utilizando Steppers limitadores.
+- Seleção de tipo de quarto através de Picker, com exibição de valor e acomodação.
+- Cálculo automático do valor total baseado na quantidade de dias e regras de negócio.
+- Página sobre o desenvolvedor com navegação.
 
-## 📸 Telas do Aplicativo
+## Tecnologias
 
-*(As imagens abaixo mostram a interface do aplicativo rodando. Para adicionar seus próprios prints, basta substituir ou adicionar arquivos na pasta `prints` e fazer o commit no GitHub)*
+- C#
+- .NET 8
+- .NET MAUI
+- Padrão MVVM (Model-View-ViewModel) para separação de lógica e interface.
 
-### Tela Principal e Tela Sobre:
-*(Você pode colocar os prints aqui)*
+## Como Executar
 
-![Tela Principal](prints/tela_principal.png)
-![Tela Sobre](prints/tela_sobre.png)
-
-## 🛠️ Tecnologias Utilizadas
-
-- **C# / .NET 8**
-- **.NET MAUI** (Multi-platform App UI)
-- **XAML** para componentização e estilização
-- **Padrão MVVM** (Model-View-ViewModel) para separar a interface (MainPage) da lógica de negócios (HotelLogica).
-
-## 🚀 Como executar este projeto
-
-1. Tenha o **Visual Studio 2022** instalado com o workload de **Desenvolvimento de interface do usuário de aplicativo multiplataforma do .NET** (.NET MAUI).
-2. Clone o repositório:
+1. Necessário ter o Visual Studio 2022 instalado com suporte para .NET MAUI.
+2. Clone este repositório:
    ```bash
    git clone https://github.com/valdandaconceicao-boop/AppHotel.git
    ```
-3. Abra a solução no Visual Studio e clique no botão verde de **Windows Machine** (ou Emulador Android) para executar.
+3. Abra a solução no Visual Studio.
+4. Selecione "Windows Machine" ou um Emulador Android como destino e execute o projeto (F5).
+
+## Telas
+
+*(Para adicionar os prints do aplicativo, salve as imagens na pasta `prints/` e referencie aqui)*
+
+- [Tela Principal](prints/tela_principal.png)
+- [Tela Sobre](prints/tela_sobre.png)
