@@ -24,6 +24,7 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="MinimumHeightRequest" Value="44" />
         <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
 
     <Style TargetType="Picker">

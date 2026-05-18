@@ -16,6 +16,7 @@ public static class MauiProgram
             });
 
         #if WINDOWS
+        // --- Fix Picker placeholder ---
         Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(
             "FixPickerTitle",
             (handler, picker) =>
@@ -31,33 +32,68 @@ public static class MauiProgram
                 }
             });
 
+        // --- Fix DatePicker: prevent text/icon from disappearing on hover ---
+        Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping(
+            "FixDatePickerHover",
+            (handler, datePicker) =>
+            {
+                if (handler.PlatformView is not Microsoft.UI.Xaml.FrameworkElement fe) return;
+
+                fe.Loaded += (s, e2) =>
+                {
+                    FixControlOnHover(fe);
+                };
+            });
+
+        // --- Fix Stepper: prevent +/- icons from disappearing on hover ---
         Microsoft.Maui.Handlers.StepperHandler.Mapper.AppendToMapping(
-            "FixStepperColors",
+            "FixStepperHover",
             (handler, stepper) =>
             {
-                var platform = handler.PlatformView;
-                if (platform == null) return;
+                if (handler.PlatformView is not Microsoft.UI.Xaml.FrameworkElement fe) return;
 
                 var darkBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(
                     Microsoft.UI.ColorHelper.FromArgb(255, 27, 67, 50));
+                var hoverBg = new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                    Microsoft.UI.ColorHelper.FromArgb(255, 220, 218, 212));
+                var pressedBg = new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                    Microsoft.UI.ColorHelper.FromArgb(255, 27, 67, 50));
+                var pressedFg = new Microsoft.UI.Xaml.Media.SolidColorBrush(
+                    Microsoft.UI.Colors.White);
 
-                platform.Resources["RepeatButtonForeground"] = darkBrush;
-                platform.Resources["RepeatButtonForegroundPressed"] = darkBrush;
-                platform.Resources["RepeatButtonForegroundPointerOver"] = darkBrush;
-                platform.Resources["RepeatButtonForegroundDisabled"] =
-                    new Microsoft.UI.Xaml.Media.SolidColorBrush(
-                        Microsoft.UI.ColorHelper.FromArgb(255, 160, 160, 160));
+                fe.Resources["RepeatButtonForeground"] = darkBrush;
+                fe.Resources["RepeatButtonForegroundPointerOver"] = darkBrush;
+                fe.Resources["RepeatButtonForegroundPressed"] = pressedFg;
+                fe.Resources["RepeatButtonBackgroundPointerOver"] = hoverBg;
+                fe.Resources["RepeatButtonBackgroundPressed"] = pressedBg;
 
-                if (platform is Microsoft.UI.Xaml.FrameworkElement fe)
+                fe.Loaded += (s, e2) =>
                 {
-                    fe.Loaded += (s, e2) =>
-                    {
-                        ApplyStepperButtonColors(fe, darkBrush);
-                    };
-                }
+                    FixStepperButtons(fe, darkBrush);
+                };
             });
 
-        static void ApplyStepperButtonColors(Microsoft.UI.Xaml.FrameworkElement root,
+        static void FixControlOnHover(Microsoft.UI.Xaml.FrameworkElement root)
+        {
+            int count = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(root);
+            for (int i = 0; i < count; i++)
+            {
+                var child = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChild(root, i);
+
+                // Fix Button: keep foreground visible on hover
+                if (child is Microsoft.UI.Xaml.Controls.Button btn)
+                {
+                    var fg = btn.Foreground;
+                    btn.PointerEntered += (s, e) => { btn.Foreground = fg; };
+                    btn.PointerExited += (s, e) => { btn.Foreground = fg; };
+                }
+
+                if (child is Microsoft.UI.Xaml.FrameworkElement feChild)
+                    FixControlOnHover(feChild);
+            }
+        }
+
+        static void FixStepperButtons(Microsoft.UI.Xaml.FrameworkElement root,
             Microsoft.UI.Xaml.Media.SolidColorBrush brush)
         {
             int count = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(root);
@@ -65,9 +101,15 @@ public static class MauiProgram
             {
                 var child = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChild(root, i);
                 if (child is Microsoft.UI.Xaml.Controls.Primitives.RepeatButton btn)
+                {
                     btn.Foreground = brush;
+                    btn.PointerEntered += (s, e) => { btn.Foreground = brush; };
+                    btn.PointerExited += (s, e) => { btn.Foreground = brush; };
+                    btn.PointerPressed += (s, e) => { btn.Foreground = brush; };
+                    btn.PointerReleased += (s, e) => { btn.Foreground = brush; };
+                }
                 if (child is Microsoft.UI.Xaml.FrameworkElement feChild)
-                    ApplyStepperButtonColors(feChild, brush);
+                    FixStepperButtons(feChild, brush);
             }
         }
         #endif

@@ -72,8 +72,8 @@
                            TextColor="{StaticResource Primary}"
                            FontFamily="OpenSansSemibold" />
 
-                    <Grid ColumnDefinitions="100, *" RowDefinitions="Auto, Auto"
-                          RowSpacing="10" ColumnSpacing="12">
+                    <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto"
+                          RowSpacing="12" ColumnSpacing="14">
                         <Label Text="Check-in"
                                VerticalOptions="Center"
                                TextColor="{StaticResource TextSecondary}"
@@ -83,6 +83,8 @@
                         <DatePicker Date="{Binding DataCheckIn}"
                                     MinimumDate="{Binding DataMinima}"
                                     Format="dd/MM/yyyy"
+                                    HorizontalOptions="FillAndExpand"
+                                    MinimumWidthRequest="180"
                                     Grid.Row="0" Grid.Column="1" />
 
                         <Label Text="Check-out"
@@ -94,6 +96,8 @@
                         <DatePicker Date="{Binding DataCheckOut}"
                                     MinimumDate="{Binding DataMinimaSaida}"
                                     Format="dd/MM/yyyy"
+                                    HorizontalOptions="FillAndExpand"
+                                    MinimumWidthRequest="180"
                                     Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </VerticalStackLayout>

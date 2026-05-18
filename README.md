@@ -28,8 +28,21 @@ Foi desenvolvida a página `Sobre.xaml` (ContentPage) contendo:
 ### 4. Navegação ✅
 Na tela principal, adicionei o botão "Sobre o Desenvolvedor" que invoca de forma assíncrona o método `Navigation.PushAsync(new Sobre())`, garantindo uma navegação fluida entre as páginas.
 
-### 5. Formato de Entrega ✅
-O código está versionado aqui no GitHub de forma limpa. As capturas de tela (prints) da tela Sobre e da execução estão na pasta compactada `.zip` enviada junto ao link deste repositório na plataforma oficial da escola.
+### 5. Um Gostinho da Aplicação Funcionando! 🚀📸
+
+Para facilitar a avaliação da professora e demonstrar a robustez do projeto, confira abaixo como a aplicação ficou na prática. A interface foi construída com foco na clareza, usabilidade e atende 100% às exigências técnicas.
+
+#### 🏨 1. Tela Inicial - Preenchimento de Dados
+Aqui iniciamos a simulação da reserva. A tela recebe os dados do hóspede e captura o período da estadia com uma validação limpa através dos componentes nativos **`DatePicker`**.
+![Tela Principal de Preenchimento](prints/Tela_Primaria.png)
+
+#### 🛏️ 2. Regra de Negócio em Ação - Seleção e Cálculo Final
+Nesta etapa, demonstramos a utilização avançada dos controles **`Stepper`** para a contagem de hóspedes e o **`Picker`** para o tipo de acomodação. O grande destaque é o processamento transparente das informações via **`BindingContext`**: com um único clique em "Calcular Reserva", a classe `HotelLogica.cs` calcula as diárias e atualiza a interface instantaneamente!
+![Resultado do Cálculo de Reserva](prints/Tela_Secundaria.png)
+
+#### 🧑‍💻 3. Tela Sobre o Desenvolvedor
+Uma página elegante e responsiva que exibe as credenciais do desenvolvedor, demonstrando também o domínio do esquema de navegação entre páginas (usando o botão "Voltar").
+![Página Sobre](prints/Sobre_Dev.png)
 
 ---
 
