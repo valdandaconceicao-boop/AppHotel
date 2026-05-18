@@ -26,7 +26,7 @@
     <Color x:Key="WarningLight">#FFFBEB</Color>
     <Color x:Key="WarningBorder">#FCD34D</Color>
     <Color x:Key="Divider">#E8E4DC</Color>
-    <Color x:Key="StepperBackground">#F5F3EE</Color>
+    <Color x:Key="StepperBackground">#B0ABA2</Color>
     <Color x:Key="NavBackground">#1B4332</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}" />
