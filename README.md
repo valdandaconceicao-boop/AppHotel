@@ -30,7 +30,7 @@ Na tela principal, adicionei o botão "Sobre o Desenvolvedor" que invoca de form
 
 ### 5. Um Gostinho da Aplicação Funcionando! 🚀📸
 
-Para facilitar a avaliação da professora e demonstrar a robustez do projeto, confira abaixo como a aplicação ficou na prática. A interface foi construída com foco na clareza, usabilidade e atende 100% às exigências técnicas.
+Para facilitar a avaliação e demonstrar a robustez do projeto, confira abaixo como a aplicação ficou na prática. A interface foi construída com foco na clareza, usabilidade e atende 100% às exigências técnicas.
 
 #### 🏨 1. Tela Inicial - Preenchimento de Dados
 Aqui iniciamos a simulação da reserva. A tela recebe os dados do hóspede e captura o período da estadia com uma validação limpa através dos componentes nativos **`DatePicker`**.
