@@ -64,28 +64,28 @@ public class HotelLogica : INotifyPropertyChanged
         }
     }
 
-    private int _quantidadeAdultos = 1;
-    public int QuantidadeAdultos
+    private double _quantidadeAdultos = 1;
+    public double QuantidadeAdultos
     {
         get => _quantidadeAdultos;
         set
         {
-            var clamped = Math.Clamp(value, 1, 10);
-            if (_quantidadeAdultos == clamped) return;
+            var clamped = Math.Clamp(Math.Round(value), 1, 10);
+            if (Math.Abs(_quantidadeAdultos - clamped) < 0.001) return;
             _quantidadeAdultos = clamped;
             OnPropertyChanged(nameof(QuantidadeAdultos));
             OnPropertyChanged(nameof(ValorTotal));
         }
     }
 
-    private int _quantidadeCriancas;
-    public int QuantidadeCriancas
+    private double _quantidadeCriancas;
+    public double QuantidadeCriancas
     {
         get => _quantidadeCriancas;
         set
         {
-            var clamped = Math.Clamp(value, 0, 5);
-            if (_quantidadeCriancas == clamped) return;
+            var clamped = Math.Clamp(Math.Round(value), 0, 5);
+            if (Math.Abs(_quantidadeCriancas - clamped) < 0.001) return;
             _quantidadeCriancas = clamped;
             OnPropertyChanged(nameof(QuantidadeCriancas));
             OnPropertyChanged(nameof(ValorTotal));
@@ -147,8 +147,8 @@ public class HotelLogica : INotifyPropertyChanged
             if (QuartoSelecionado == null) return 0;
             var dias = (DataCheckOut - DataCheckIn).Days;
             if (dias <= 0) return 0;
-            return (QuantidadeAdultos * QuartoSelecionado.ValorDiariaAdulto
-                + QuantidadeCriancas * QuartoSelecionado.ValorDiariaCrianca) * dias;
+        return ((int)QuantidadeAdultos * QuartoSelecionado.ValorDiariaAdulto
+            + (int)QuantidadeCriancas * QuartoSelecionado.ValorDiariaCrianca) * dias;
         }
     }
 
@@ -196,12 +196,12 @@ public class HotelLogica : INotifyPropertyChanged
         if (dias <= 0)
             return "A data de check-out deve ser posterior ao check-in.";
 
-        if (QuantidadeCriancas > 0 && QuartoSelecionado.ValorDiariaCrianca == 0)
+        if ((int)QuantidadeCriancas > 0 && QuartoSelecionado.ValorDiariaCrianca == 0)
             return $"O \"{QuartoSelecionado.NomeQuarto}\" nao acomoda criancas. Escolha outro quarto ou remova as criancas.";
 
-        var hospedes = $"{QuantidadeAdultos} adulto(s)";
-        if (QuantidadeCriancas > 0)
-            hospedes += $" e {QuantidadeCriancas} crianca(s)";
+        var hospedes = $"{(int)QuantidadeAdultos} adulto(s)";
+        if ((int)QuantidadeCriancas > 0)
+            hospedes += $" e {(int)QuantidadeCriancas} crianca(s)";
 
         return $"Reserva confirmada!\n" +
             $"Hospede: {Nome}\n" +

@@ -11,34 +11,6 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         _logica = new HotelLogica();
         BindingContext = _logica;
-
-        QuartoPicker.SelectedIndexChanged += OnQuartoChanged;
-    }
-
-    private void OnQuartoChanged(object? sender, EventArgs e)
-    {
-        if (QuartoPicker.SelectedIndex >= 0)
-        {
-            _logica.QuartoSelecionado = _logica.ListaQuartos[QuartoPicker.SelectedIndex];
-        }
-    }
-
-    private void OnIncrementarAdultos(object sender, EventArgs e)
-        => _logica.QuantidadeAdultos++;
-
-    private void OnDecrementarAdultos(object sender, EventArgs e)
-    {
-        if (_logica.QuantidadeAdultos > 1)
-            _logica.QuantidadeAdultos--;
-    }
-
-    private void OnIncrementarCriancas(object sender, EventArgs e)
-        => _logica.QuantidadeCriancas++;
-
-    private void OnDecrementarCriancas(object sender, EventArgs e)
-    {
-        if (_logica.QuantidadeCriancas > 0)
-            _logica.QuantidadeCriancas--;
     }
 
     private void OnCalcularClicked(object sender, EventArgs e)
@@ -73,7 +45,6 @@ public partial class MainPage : ContentPage
         _logica.Limpar();
         ResultadoFrame.IsVisible = false;
         BtnNovaReserva.IsVisible = false;
-        QuartoPicker.SelectedIndex = -1;
     }
 
     private async void OnBotaoSobreClicked(object sender, EventArgs e)

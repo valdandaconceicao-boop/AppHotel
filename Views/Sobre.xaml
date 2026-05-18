@@ -36,15 +36,15 @@
                             HorizontalOptions="Center"
                             BackgroundColor="{StaticResource InputBackground}"
                             Padding="0">
-                        <Image Source="minha_foto.png"
-                               WidthRequest="150"
-                               HeightRequest="150"
-                               Aspect="AspectFill">
-                            <Image.Clip>
-                                <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
-                            </Image.Clip>
-                        </Image>
-                    </Border>
+<Image Source="minha_foto.png"
+                       WidthRequest="150"
+                       HeightRequest="150"
+                       Aspect="AspectFill">
+                        <Image.Clip>
+                            <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                        </Image.Clip>
+                    </Image>
+                </Border>
 
                     <Label Text="Valdan Conceição Fraça"
                            FontSize="22"
